@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mytodo/contollers/personneController.dart';
 import 'package:mytodo/theme/appTheme.dart';
 import 'package:mytodo/theme/themeController.dart';
 import 'package:mytodo/view/Home.dart';
@@ -7,6 +8,7 @@ import 'package:mytodo/view/Home.dart';
 
 void main() {
   Get.put(Themecontroller());
+  Get.put(PersonneController());
   runApp(MyApp());
 }
 
