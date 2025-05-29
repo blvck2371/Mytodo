@@ -31,7 +31,7 @@ class Apptheme {
 
   static final ThemeData darkTheme = ThemeData(
     appBarTheme: AppBarTheme(backgroundColor: Appcolors.primaryColorDark),
-    primaryColorLight: Appcolors.primaryColorLight,
+    primaryColorLight: Appcolors.primaryColorDark,
 
     primaryColor: Appcolors.primaryColorDark,
     secondaryHeaderColor: Appcolors.secondaryColorLight,

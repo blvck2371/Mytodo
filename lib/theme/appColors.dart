@@ -3,9 +3,9 @@ import 'package:flutter/widgets.dart';
 
 class Appcolors {
   // couleurs de lapplication theme light
-  static const Color primaryColorLight = Color.fromARGB(255, 37, 207, 139);
+  static const Color primaryColorLight = Colors.blue;
   static const Color secondaryColorLight = Color.fromARGB(255, 192, 196, 194);
-  static const Color backgroundcolorLight = Color.fromARGB(255, 255, 255, 255);
+  static const Color backgroundcolorLight = Color.fromARGB(222, 255, 255, 255);
   static const Color backgroundcolorappbarLight = Color.fromARGB(
     220,
     250,

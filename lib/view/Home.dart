@@ -3,8 +3,11 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:mytodo/contollers/personneController.dart';
 import 'package:mytodo/model/personne.dart';
+import 'package:mytodo/model/tache.dart';
 import 'package:mytodo/theme/appSpacing.dart';
 import 'package:mytodo/theme/themeController.dart';
+import 'package:mytodo/view/composant/Menuetat.dart';
+import 'package:mytodo/view/composant/onProgress.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -90,7 +93,7 @@ class _HomeState extends State<Home> {
                       size: 22,
                       color:
                           themeController.themeMode.value == ThemeMode.light
-                              ? Theme.of(context).primaryColorDark
+                              ? Theme.of(context).primaryColor
                               : Theme.of(context).primaryColorLight,
                     ),
                   ),
@@ -132,8 +135,87 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Container(child: Center(child: Text('Hello'))),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          // colone pour tout
+          children: [
+            Container(
+              color: Theme.of(context).appBarTheme.backgroundColor,
+
+              child: MenuEtat(menu: "En Cours", nombre: "17"),
+            ),
+            2.vSpace,
+            // on progress
+            Container(
+              margin: EdgeInsets.only(
+                left: AppSpacing.sm,
+                right: AppSpacing.sm,
+              ),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    OnProgress(taches: Tache()),
+                    20.hSpace,
+                    OnProgress(taches: Tache()),
+                    20.hSpace,
+
+                    OnProgress(taches: Tache()),
+                    20.hSpace,
+
+                    OnProgress(taches: Tache()),
+                  ],
+                ),
+              ),
+            ),
+
+            //end on progree
+
+            //achevé
+            10.vSpace,
+            Container(
+              color: Theme.of(context).appBarTheme.backgroundColor,
+
+              child: MenuEtat(menu: "Achevé", nombre: "54"),
+            ),
+          ],
+        ),
       ),
+
+      floatingActionButton: Container(
+        width: 60,
+        height: 60,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.blue,
+
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black38,
+              offset: Offset(0, 6), // Décalage de l’ombre vers le bas
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        child: IconButton(
+          icon: Icon(Icons.add, color: Colors.white),
+          onPressed: () {},
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+
+      //  FloatingActionButton(
+
+      //   backgroundColor: const Color.fromARGB(255, 113, 165, 255),
+      //   onPressed: () {},
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: [
+      //       Icon(Icons.add),
+      //       Container(child: Text("Creer un Nouveau")),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }
