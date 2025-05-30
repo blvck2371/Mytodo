@@ -8,6 +8,7 @@ import 'package:mytodo/theme/appSpacing.dart';
 import 'package:mytodo/theme/themeController.dart';
 import 'package:mytodo/view/composant/CompletedTask.dart';
 import 'package:mytodo/view/composant/Menuetat.dart';
+import 'package:mytodo/view/composant/bottomshet.dart';
 import 'package:mytodo/view/composant/onProgress.dart';
 
 class Home extends StatefulWidget {
@@ -20,6 +21,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final utilisateur = Get.find<PersonneController>();
   final Themecontroller themeController = Get.find();
+
+  //hhhhhhhhhhhhhh
+
+  //jjjjjjjjjjjjjjjj
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -220,7 +225,9 @@ class _HomeState extends State<Home> {
         ),
         child: IconButton(
           icon: Icon(Icons.add, color: Colors.white),
-          onPressed: () {},
+          onPressed: () {
+            showNewTaskModal(context);
+          },
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
