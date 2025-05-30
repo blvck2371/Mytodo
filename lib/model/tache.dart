@@ -30,9 +30,7 @@ class Tache {
   }) {
     this.nom.value = nom ?? 'Developpement UI UX Todo APP';
     this.dateCreation.value = dateCreation ?? DateCrea();
-    this.description.value =
-        description ??
-        'ceci est un projet de creation dune application de todo list';
+    this.description.value = description ?? 'ceci est un projet de creation ';
     this.estCollective.value = estCollective ?? false;
     this.detailTache.value = detailTache ?? '';
     this.progression.value = progression ?? 30;

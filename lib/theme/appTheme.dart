@@ -10,6 +10,12 @@ class Apptheme {
 
     iconTheme: IconThemeData(color: Colors.black),
     textTheme: TextTheme(
+      displayLarge: TextStyle(
+        color: Appcolors.textColorlight,
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        decoration: TextDecoration.lineThrough,
+      ),
       titleLarge: TextStyle(
         color: Appcolors.textColorlight,
         fontSize: 18,
@@ -37,9 +43,23 @@ class Apptheme {
     secondaryHeaderColor: Appcolors.secondaryColorLight,
     scaffoldBackgroundColor: Appcolors.backgroundcolorLight,
     textTheme: TextTheme(
-      titleLarge: TextStyle(color: Appcolors.textColorlight),
+      displayLarge: TextStyle(
+        color: Appcolors.textColorlight,
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        decoration: TextDecoration.lineThrough,
+      ),
+      titleLarge: TextStyle(
+        color: Appcolors.textColorlight,
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+      ),
+      titleSmall: TextStyle(
+        color: Appcolors.textColorlight,
+        fontSize: 12,
+        fontWeight: FontWeight.w300,
+      ),
     ),
-
     //colorScheme: ColorScheme(brightness: Brightness.light, primary: Appcolors.primaryColorLight, onPrimary: Appcolors.secondaryColorLight, secondary: Appcolors.secondaryColorDark, onSecondary: Appcolors.secondaryColorDark, error: error, onError: onError, surface: surface, onSurface: onSurface)
   );
 }

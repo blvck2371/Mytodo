@@ -20,9 +20,24 @@ class _OnProgressState extends State<OnProgress> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).appBarTheme.backgroundColor,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+            ),
+
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black38,
+                offset: Offset(0, 6), // Décalage de l’ombre vers le bas
+                blurRadius: 10,
+              ),
+            ],
+          ),
           width: MediaQuery.of(context).size.width / 1.40,
-          padding: EdgeInsets.all(AppSpacing.sm),
-          color: Theme.of(context).appBarTheme.backgroundColor,
+          padding: EdgeInsets.all(AppSpacing.md),
+
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -32,8 +47,14 @@ class _OnProgressState extends State<OnProgress> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('${widget.taches.nom}'),
-                        Text('${widget.taches.dateCreation}'),
+                        Text(
+                          '${widget.taches.nom}',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        Text(
+                          '${widget.taches.dateCreation}',
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
                       ],
                     ),
                   ),
@@ -44,12 +65,19 @@ class _OnProgressState extends State<OnProgress> {
                     ),
                     height: 55,
                     width: 55,
-                    child: Icon(Icons.people, size: 35),
+                    child: Icon(
+                      Icons.people,
+                      size: 35,
+                      color: Theme.of(context).appBarTheme.backgroundColor,
+                    ),
                   ),
                 ],
               ),
               Divider(),
-              Text('Description: '),
+              Text(
+                'Description: ',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
               Text('${widget.taches.description}'),
 
               //equipe
@@ -63,7 +91,10 @@ class _OnProgressState extends State<OnProgress> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('equipe: '),
+                          Text(
+                            'equipe: ',
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
                           Row(
                             children: [
                               Icon(Icons.person),
@@ -78,7 +109,10 @@ class _OnProgressState extends State<OnProgress> {
                   // progression bar
                   Column(
                     children: [
-                      Text('Progresion'),
+                      Text(
+                        'Progresion',
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
                       5.vSpace,
                       Row(
                         children: [
@@ -114,7 +148,13 @@ class _OnProgressState extends State<OnProgress> {
         Container(
           width: MediaQuery.of(context).size.width / 1.40,
           height: AppSpacing.sm,
-          color: Theme.of(context).primaryColor,
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(10),
+              bottomRight: Radius.circular(10),
+            ),
+          ),
         ),
       ],
     );

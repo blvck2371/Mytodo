@@ -6,6 +6,7 @@ import 'package:mytodo/model/personne.dart';
 import 'package:mytodo/model/tache.dart';
 import 'package:mytodo/theme/appSpacing.dart';
 import 'package:mytodo/theme/themeController.dart';
+import 'package:mytodo/view/composant/CompletedTask.dart';
 import 'package:mytodo/view/composant/Menuetat.dart';
 import 'package:mytodo/view/composant/onProgress.dart';
 
@@ -177,6 +178,26 @@ class _HomeState extends State<Home> {
               color: Theme.of(context).appBarTheme.backgroundColor,
 
               child: MenuEtat(menu: "Achevé", nombre: "54"),
+            ),
+
+            10.vSpace,
+            Container(
+              margin: EdgeInsets.only(
+                left: AppSpacing.sm,
+                right: AppSpacing.sm,
+              ),
+
+              child: Column(
+                children: [
+                  CompletedTask(taches: Tache()),
+                  5.vSpace,
+                  CompletedTask(taches: Tache()),
+                  5.vSpace,
+                  CompletedTask(taches: Tache()),
+                  5.vSpace,
+                  CompletedTask(taches: Tache()),
+                ],
+              ),
             ),
           ],
         ),
