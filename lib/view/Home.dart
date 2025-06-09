@@ -4,12 +4,15 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:mytodo/contollers/personneController.dart';
 import 'package:mytodo/model/personne.dart';
 import 'package:mytodo/model/tache.dart';
+import 'package:mytodo/notifications/notificationSevices.dart';
 import 'package:mytodo/theme/appSpacing.dart';
 import 'package:mytodo/theme/themeController.dart';
 import 'package:mytodo/view/composant/CompletedTask.dart';
 import 'package:mytodo/view/composant/Menuetat.dart';
 import 'package:mytodo/view/composant/bottomshet.dart';
 import 'package:mytodo/view/composant/onProgress.dart';
+import 'package:mytodo/view/task_scheduler_view.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -113,12 +116,18 @@ class _HomeState extends State<Home> {
                     borderRadius: BorderRadius.circular(20),
                     color: Theme.of(context).scaffoldBackgroundColor,
                   ),
-                  child: Icon(
-                    Icons.calendar_month,
-                    size: 22,
-                    color: Theme.of(context).iconTheme.color,
+                  child: IconButton(
+                    onPressed: () {
+                      Get.to(TaskSchedulerView());
+                    },
+                    icon: Icon(
+                      Icons.calendar_month,
+                      size: 22,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                   ),
                 ),
+
                 2.hSpace,
 
                 Container(
@@ -128,10 +137,43 @@ class _HomeState extends State<Home> {
                     borderRadius: BorderRadius.circular(20),
                     color: Theme.of(context).scaffoldBackgroundColor,
                   ),
-                  child: Icon(
-                    Icons.notifications_outlined,
-                    size: 22,
-                    color: Theme.of(context).iconTheme.color,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.notifications_outlined,
+                      size: 22,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                    onPressed: () async {
+                      final status = await Permission.notification.status;
+
+                      if (status.isGranted) {
+                        // Permission déjà accordée
+                        NotificationServices().showNotification(
+                          title: 'My Todo',
+                          body: 'Tâche à effectuer.....',
+                        );
+                      } else {
+                        // Demander la permission
+                        final newStatus =
+                            await Permission.notification.request();
+
+                        if (newStatus.isGranted) {
+                          NotificationServices().showNotification(
+                            title: 'My Todo',
+                            body: 'Tâche à effectuer.....',
+                          );
+                        } else {
+                          // Optionnel : montrer un message ou rediriger vers les paramètres
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Notification refusée. Activez-la dans les paramètres.',
+                              ),
+                            ),
+                          );
+                        }
+                      }
+                    },
                   ),
                 ),
                 15.hSpace,
