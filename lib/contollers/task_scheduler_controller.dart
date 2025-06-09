@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:mytodo/model/hour_model.dart';
 import 'package:mytodo/notifications/notificationSevices.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class TaskSchedulerController extends GetxController {
   final RxList<HourModel> hours = <HourModel>[].obs;
@@ -16,6 +17,37 @@ class TaskSchedulerController extends GetxController {
       HourModel(time: '17:12'),
     ]);
     _scheduleAll();
+  }
+
+  Future<void> _requestNotificationPermissionIfNeeded() async {
+    final status = await Permission.notification.status;
+
+    if (status.isGranted) {
+      // Déjà autorisé : envoyer la notification directement
+      NotificationServices().showNotification(
+        id: 0,
+        title: 'Oklm',
+        body: 'Sultan de brunel',
+      );
+    } else if (status.isDenied || status.isRestricted || status.isLimited) {
+      // Demander l'autorisation
+      final result = await Permission.notification.request();
+
+      if (result.isGranted) {
+        NotificationServices().showNotification(
+          id: 0,
+          title: 'Oklm',
+          body: 'Sultan de brunel',
+        );
+      } else {
+        _requestNotificationPermissionIfNeeded();
+      }
+    } else if (status.isPermanentlyDenied) {
+      // Permission refusée de façon permanente
+
+      // Tu peux ici proposer d’ouvrir les paramètres :
+      openAppSettings();
+    }
   }
 
   DateTime _getNextExecutionTime(String hourStr) {
@@ -45,11 +77,8 @@ class TaskSchedulerController extends GetxController {
       /// end
       ///
       ///
-      NotificationServices().showNotification(
-        id: 0,
-        body: 'Sultan de brunel',
-        title: 'Oklm',
-      );
+      ///
+      _requestNotificationPermissionIfNeeded();
 
       ///
       _scheduleHour(model); // Replanifie
