@@ -40,7 +40,7 @@ class Apptheme {
     primaryColorLight: Appcolors.primaryColorDark,
 
     primaryColor: Appcolors.primaryColorDark,
-    secondaryHeaderColor: Appcolors.secondaryColorLight,
+    secondaryHeaderColor: Colors.white24,
     scaffoldBackgroundColor: Appcolors.backgroundcolorLight,
     textTheme: TextTheme(
       displayLarge: TextStyle(
