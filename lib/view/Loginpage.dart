@@ -99,6 +99,11 @@ class _LoginPageState extends State<LoginPage> {
             password: passwordController.text.trim(),
           );
 
+      print("userCredential.user!.uid");
+      print(userCredential.user!.uid);
+      print(userCredential.user!.uid);
+      print("userCredential.user!.uid");
+
       final uid = userCredential.user!.uid;
 
       await FirebaseFirestore.instance
