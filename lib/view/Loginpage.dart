@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
+import '../theme/appColors.dart';
 
 import 'home.dart';
 
@@ -150,46 +151,10 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  Widget buildSocialButton(String label, IconData icon, VoidCallback onTap) {
-    return ElevatedButton.icon(
-      onPressed: onTap,
-      icon: Icon(icon, color: Colors.black),
-      label: Text(label, style: const TextStyle(color: Colors.black)),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white,
-        minimumSize: const Size.fromHeight(50),
-        side: const BorderSide(color: Colors.grey),
-      ),
-    );
-  }
-
-  Widget buildTextField({
-    required String label,
-    required TextEditingController controller,
-    bool obscure = false,
-    Widget? suffix,
-    String? Function(String?)? validator,
-    TextInputType? keyboardType,
-    List<TextInputFormatter>? inputFormatters,
-  }) {
-    return TextFormField(
-      controller: controller,
-      obscureText: obscure,
-      validator: validator,
-      keyboardType: keyboardType,
-      inputFormatters: inputFormatters,
-      decoration: InputDecoration(
-        labelText: label,
-        border: const OutlineInputBorder(),
-        suffixIcon: suffix,
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Appcolors.backgroundcolorLight,
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -197,30 +162,28 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.all(24),
             children: [
               const SizedBox(height: 30),
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () => setState(() => isLogin = true),
-                    child: Text(
-                      'Connexion',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: isLogin ? FontWeight.bold : FontWeight.normal,
-                      ),
-                    ),
+              Center(
+                child: Text(
+                  isLogin ? 'Connexion' : 'Inscription',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Appcolors.primaryColorLight,
                   ),
-                  const SizedBox(width: 20),
-                  GestureDetector(
-                    onTap: () => setState(() => isLogin = false),
-                    child: Text(
-                      'Inscription',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: !isLogin ? FontWeight.bold : FontWeight.normal,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Center(
+                child: Switch(
+                  value: !isLogin,
+                  onChanged: (value) {
+                    setState(() {
+                      isLogin = !value;
+                    });
+                  },
+                  activeColor: Appcolors.primaryColorLight,
+                  activeTrackColor: Appcolors.secondaryColorLight,
+                ),
               ),
               const SizedBox(height: 24),
               if (!isLogin) ...[
@@ -260,6 +223,7 @@ class _LoginPageState extends State<LoginPage> {
                 suffix: IconButton(
                   icon: Icon(
                     isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                    color: Appcolors.primaryColorLight,
                   ),
                   onPressed: () => setState(() => isPasswordVisible = !isPasswordVisible),
                 ),
@@ -279,43 +243,26 @@ class _LoginPageState extends State<LoginPage> {
                   suffix: IconButton(
                     icon: Icon(
                       isConfirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                      color: Appcolors.primaryColorLight,
                     ),
                     onPressed: () => setState(() => isConfirmPasswordVisible = !isConfirmPasswordVisible),
                   ),
                 ),
               ],
-              const SizedBox(height: 8),
-              if (isLogin)
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {}, // TODO: reset password
-                    child: const Text.rich(
-                      TextSpan(
-                        text: "Mot de passe oublié ? ",
-                        children: [
-                          TextSpan(
-                            text: "Réinitialisez-le",
-                            style: TextStyle(color: Colors.green),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 24),
               ElevatedButton(
-                onPressed:
-                    isLogin ? signInWithEmailPassword : registerWithEmailPassword,
+                onPressed: isLogin ? signInWithEmailPassword : registerWithEmailPassword,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).primaryColor,
+                  backgroundColor: Appcolors.primaryColorLight,
+                  foregroundColor: Colors.white,
                   minimumSize: const Size.fromHeight(50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
                 child: Text(
                   isLogin ? "Se connecter" : "Créer un compte",
-                  style: TextStyle(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                  ),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
               const SizedBox(height: 20),
@@ -341,6 +288,62 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildSocialButton(String label, IconData icon, VoidCallback onTap) {
+    return ElevatedButton.icon(
+      onPressed: onTap,
+      icon: Icon(icon, color: Appcolors.primaryColorLight),
+      label: Text(label, style: TextStyle(color: Appcolors.primaryColorLight)),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        minimumSize: const Size.fromHeight(50),
+        side: BorderSide(color: Appcolors.secondaryColorLight),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+    );
+  }
+
+  Widget buildTextField({
+    required String label,
+    required TextEditingController controller,
+    bool obscure = false,
+    Widget? suffix,
+    String? Function(String?)? validator,
+    TextInputType? keyboardType,
+    List<TextInputFormatter>? inputFormatters,
+  }) {
+    return TextFormField(
+      controller: controller,
+      obscureText: obscure,
+      validator: validator,
+      keyboardType: keyboardType,
+      inputFormatters: inputFormatters,
+      style: TextStyle(color: Appcolors.textColorlight),
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: Appcolors.textColorlightsm),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: Appcolors.secondaryColorLight),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: Appcolors.secondaryColorLight),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: Appcolors.primaryColorLight),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: Colors.red),
+        ),
+        suffixIcon: suffix,
       ),
     );
   }
