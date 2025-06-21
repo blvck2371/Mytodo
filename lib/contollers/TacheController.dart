@@ -14,15 +14,15 @@ class TacheController extends GetxController {
     }
   }
 
-  void mettreAJourProgression(int index, int nouvelleValeur) {
-    if (index >= 0 && index < taches.length) {
-      taches[index].progression.value = nouvelleValeur.clamp(0, 100);
-    }
-  }
+  // void mettreAJourProgression(int index, int nouvelleValeur) {
+  //   if (index >= 0 && index < taches.length) {
+  //     taches[index].progression.value = nouvelleValeur.clamp(0, 100);
+  //   }
+  // }
 
-  void ajouterIntervenant(int index, String nomIntervenant) {
-    if (index >= 0 && index < taches.length) {
-      taches[index].intervenants.add(nomIntervenant);
-    }
-  }
+  // void ajouterIntervenant(int index, String nomIntervenant) {
+  //   if (index >= 0 && index < taches.length) {
+  //     taches[index].intervenants.add(nomIntervenant);
+  //   }
+  // }
 }

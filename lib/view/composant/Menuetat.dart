@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mytodo/theme/appSpacing.dart';
+import 'package:mytodo/theme/appTypography.dart';
 
 class MenuEtat extends StatefulWidget {
   MenuEtat({super.key, required this.menu, required this.nombre});
@@ -23,14 +24,26 @@ class _MenuEtatState extends State<MenuEtat> {
         children: [
           Row(
             children: [
-              Text(widget.menu, style: Theme.of(context).textTheme.titleLarge),
-              Text("(" + widget.nombre + ")"),
+              Text(
+                widget.menu,
+                style: AppTypography.titleLargeStyle.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+              Text(
+                "(${widget.nombre})",
+                style: AppTypography.titleMediumStyle.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
             ],
           ),
           InkWell(
             child: Text(
               "voir plus..",
-              style: TextStyle(color: Theme.of(context).primaryColor),
+              style: AppTypography.labelLargeStyle.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
           ),
         ],
