@@ -192,7 +192,7 @@ class _HomeState extends State<Home> {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'Déconnexion',
+                    'Déconnexioner',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.error,
                     ),
